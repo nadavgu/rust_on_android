@@ -3,9 +3,9 @@ package com.rust.template;
 public class RustBindings {
     private static boolean mInitialized = false;
 
-    public RustBindings() {
+    public RustBindings(NativeLoader nativeLoader) {
         if (!mInitialized) {
-            System.loadLibrary("template_lib");
+            nativeLoader.load();
             mInitialized = true;
         }
     }

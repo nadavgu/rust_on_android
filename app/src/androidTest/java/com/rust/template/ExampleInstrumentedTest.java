@@ -16,6 +16,7 @@ import org.junit.runner.RunWith;
 public class ExampleInstrumentedTest {
     @Test
     public void rustGreeting() {
-        assertEquals("Rust community: Hello There", new RustBindings().greeting("There"));
+        RustBindings rustBindings = new RustBindings(() -> System.loadLibrary("template_lib"));
+        assertEquals("Rust community: Hello There", rustBindings.greeting("There"));
     }
 }
