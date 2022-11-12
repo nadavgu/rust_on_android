@@ -1,4 +1,4 @@
-package com.krupitskas.pong;
+package com.rust.template;
 
 import org.junit.Test;
 

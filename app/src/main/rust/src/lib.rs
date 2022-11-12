@@ -55,7 +55,7 @@ pub mod android {
                 fn_ptr: greeting as *mut c_void,
             }
         ];
-        let class = env.find_class("com/krupitskas/pong/RustBindings")?;
+        let class = env.find_class("com/rust/template/RustBindings")?;
         env.register_native_methods(class, &native_methods)?;
 
         Ok(())

@@ -1,6 +1,6 @@
-#[path = "./lib.rs"] mod pong_lib;
+#[path = "./lib.rs"] mod template_lib;
 
-use pong_lib::inner_rust_greeting;
+use template_lib::inner_rust_greeting;
 
 fn main() {
     let info = "from PC";
