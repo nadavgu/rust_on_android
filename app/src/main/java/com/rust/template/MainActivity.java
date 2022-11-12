@@ -2,9 +2,7 @@ package com.rust.template;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
