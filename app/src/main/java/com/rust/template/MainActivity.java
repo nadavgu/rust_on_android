@@ -13,7 +13,7 @@ public class MainActivity extends AppCompatActivity {
 
         System.loadLibrary("template_lib");
 
-        String r = RustBindings.greeting("Android world");
+        String r = new RustBindings().greeting("Android world");
         ((TextView)findViewById(R.id.helloWorldText)).setText(r);
     }
 }
