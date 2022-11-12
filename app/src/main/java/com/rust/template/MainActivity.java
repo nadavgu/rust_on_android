@@ -11,8 +11,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        System.loadLibrary("template_lib");
-
         String r = new RustBindings().greeting("Android world");
         ((TextView)findViewById(R.id.helloWorldText)).setText(r);
     }
