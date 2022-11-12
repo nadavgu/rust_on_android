@@ -1,8 +1,6 @@
 [package]
 name = "template"
 version = "0.0.1"
-authors = ["Nikita rust <krupitskaz@gmail.com>"]
-edition = "2018"
 
 [dependencies]
 [target.'cfg(target_os="android")'.dependencies]
