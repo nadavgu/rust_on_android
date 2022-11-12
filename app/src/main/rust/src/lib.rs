@@ -29,13 +29,14 @@ pub unsafe extern fn rust_greeting_free(s: *mut c_char) {
 pub mod android {
     extern crate jni;
 
+    use std::os::raw::c_void;
     use super::*;
-    use self::jni::JNIEnv;
-    use self::jni::objects::{JClass, JString, JObject};
-    use self::jni::sys::{jstring};
+    use self::jni::errors::Error;
+    use self::jni::{JNIEnv, JavaVM, NativeMethod};
+    use self::jni::objects::{JClass, JString};
+    use self::jni::sys::{jstring, jint, JNI_VERSION_1_6, JNI_ERR};
 
-    #[no_mangle]
-    pub unsafe extern fn Java_com_krupitskas_pong_RustBindings_greeting(env: JNIEnv, _: JClass, java_pattern: JString) -> jstring {
+    pub unsafe extern fn greeting(env: JNIEnv, _: JClass, java_pattern: JString) -> jstring {
         // Our Java companion code might pass-in "world" as a string, hence the name.
         let world = rust_greeting(env.get_string(java_pattern).expect("invalid pattern string").as_ptr());
         // Retake pointer so that we can use it below and allow memory to be freed when it goes out of scope.
@@ -43,5 +44,28 @@ pub mod android {
         rust_greeting_free(world);
 
         output.into_inner()
+    }
+
+    pub fn JNI_OnLoadInner(vm: JavaVM) -> Result<(), Error> {
+        let env = vm.get_env()?;
+        let native_methods = [
+            NativeMethod {
+                name: "greeting".into(),
+                sig: "(Ljava/lang/String;)Ljava/lang/String;".into(),
+                fn_ptr: greeting as *mut c_void,
+            }
+        ];
+        let class = env.find_class("com/krupitskas/pong/RustBindings")?;
+        env.register_native_methods(class, &native_methods)?;
+
+        Ok(())
+    }
+
+    #[no_mangle]
+    pub unsafe extern fn JNI_OnLoad(vm: JavaVM, _: *mut c_void) -> jint {
+        return match JNI_OnLoadInner(vm) {
+            Err(_) => JNI_ERR,
+            Ok(_) => JNI_VERSION_1_6,
+        }
     }
 }
