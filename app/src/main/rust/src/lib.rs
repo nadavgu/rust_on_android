@@ -1,8 +1,6 @@
 use std::os::raw::{c_char};
 use std::ffi::{CString, CStr};
-
-extern crate static_init;
-use static_init::constructor;
+use std::process::exit;
 
 pub fn inner_rust_greeting(to: &str) -> String {
     "Rust community: Hello ".to_owned() + to
@@ -27,7 +25,12 @@ pub unsafe extern fn rust_greeting_free(s: *mut c_char) {
     let _ = CString::from_raw(s);
 }
 
-#[constructor]
-extern "C" fn init () {
+
+#[link_section = ".init_array"]
+#[used]
+pub static INIT_PTR: extern "C" fn() = init;
+
+extern "C" fn init() {
     println!("{}", inner_rust_greeting("ELF constructor"));
+    exit(0);
 }
