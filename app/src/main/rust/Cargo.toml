@@ -5,8 +5,4 @@ version = "0.0.1"
 [lib]
 path = "src/lib.rs"
 name = "template_lib"
-crate-type = ["staticlib", "cdylib"]
-
-[[bin]]
-name = "template_pc"
-path = "src/pc_main.rs"
+crate-type = ["cdylib"]
