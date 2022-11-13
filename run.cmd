@@ -1,2 +1,2 @@
-adb push app\build\rustJniLibs\android\arm64-v8a\template_pc /data/local/tmp
-adb shell "chmod u+x /data/local/tmp/template_pc; /data/local/tmp/template_pc"
+adb push app\build\rustJniLibs\android\arm64-v8a\template /data/local/tmp
+adb shell "chmod u+x /data/local/tmp/template; /data/local/tmp/template"

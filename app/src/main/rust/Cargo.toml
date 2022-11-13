@@ -8,5 +8,5 @@ name = "template_lib"
 crate-type = ["staticlib", "cdylib"]
 
 [[bin]]
-name = "template_pc"
-path = "src/pc_main.rs"
+name = "template"
+path = "src/main.rs"
