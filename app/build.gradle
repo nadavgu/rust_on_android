@@ -27,8 +27,9 @@ apply plugin: 'org.mozilla.rust-android-gradle.rust-android'
 
 cargo {
     module  = "src/main/rust"
-    libname = "template_lib"
+    libname = "template_pc"
     targets = ["arm64", "x86", "x86_64", "arm"]
+    targetIncludes = ["template_pc"]
     prebuiltToolchains = true
     apiLevel = 21
 }
