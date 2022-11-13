@@ -6,3 +6,6 @@ version = "0.0.1"
 path = "src/lib.rs"
 name = "template_lib"
 crate-type = ["cdylib"]
+
+[dependencies]
+static_init = "1.0.3"
